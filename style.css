@@ -1,0 +1,377 @@
+:root {
+  --bg-color-light: #f8f9fa;
+  --card-color-light: #ffffff;
+  --text-color-light: #212529;
+  --primary-color-light: #6c757d;
+  --border-color-light: #dee2e6;
+  --shadow-light: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --bg-color-dark: #1a1a1a;
+  --card-color-dark: #2c2c2c;
+  --text-color-dark: #e6e6e6;
+  --primary-color-dark: #949494;
+  --border-color-dark: #444444;
+  --shadow-dark: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --status-applied: #ffc107;
+  --status-waiting: #17a2b8;
+  --status-interview: #6f42c1;
+  --status-accepted: #28a745;
+  --status-rejected: #dc3545;
+  --bg-color: var(--bg-color-light);
+  --card-color: var(--card-color-light);
+  --text-color: var(--text-color-light);
+  --primary-color: var(--primary-color-light);
+  --border-color: var(--border-color-light);
+  --shadow: var(--shadow-light);
+}
+
+body.dark-mode {
+  --bg-color: var(--bg-color-dark);
+  --card-color: var(--card-color-dark);
+  --text-color: var(--text-color-dark);
+  --primary-color: var(--primary-color-dark);
+  --border-color: var(--border-color-dark);
+  --shadow: var(--shadow-dark);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Courier New', monospace;
+}
+
+body {
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+header {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  margin-bottom: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.control-group {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+button, select, input {
+  padding: 8px 16px;
+  background-color: var(--card-color);
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  color: var(--text-color);
+}
+
+button:hover {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+.add-btn {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+}
+
+select, input {
+  min-width: 120px;
+}
+
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+
+.toggle-switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+.toggle-switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--primary-color);
+  transition: .4s;
+  border-radius: 34px;
+}
+
+.toggle-slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  transition: .4s;
+  border-radius: 50%;
+}
+
+input:checked + .toggle-slider {
+  background-color: #6f42c1;
+}
+
+input:checked + .toggle-slider:before {
+  transform: translateX(26px);
+}
+
+.applications {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.application-card {
+  background-color: var(--card-color);
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.application-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.status-badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: white;
+}
+
+.status-applied { background-color: var(--status-applied); }
+.status-waiting { background-color: var(--status-waiting); }
+.status-interview { background-color: var(--status-interview); }
+.status-accepted { background-color: var(--status-accepted); }
+.status-rejected { background-color: var(--status-rejected); }
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 5px;
+}
+
+.card-company {
+  font-size: 1rem;
+  color: var(--primary-color);
+  margin-bottom: 5px;
+}
+
+.card-date {
+  font-size: 0.9rem;
+  color: var(--primary-color);
+  margin-bottom: 10px;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.card-actions button {
+  padding: 5px 10px;
+  font-size: 0.8rem;
+}
+
+.delete-btn {
+  background-color: var(--status-rejected);
+  color: white;
+}
+
+.edit-btn {
+  background-color: var(--status-waiting);
+  color: white;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--card-color);
+  border-radius: 8px;
+  padding: 20px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: var(--shadow);
+  color: var(--text-color);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 10px;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--text-color);
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 600;
+}
+
+input, select, textarea {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  font-family: 'Courier New', monospace;
+  background-color: var(--card-color);
+  color: var(--text-color);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.submit-btn {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: 600;
+  margin-top: 10px;
+  width: 100%;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  background-color: var(--card-color);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  grid-column: 1 / -1;
+  transition: background-color 0.3s ease;
+}
+
+.notification {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: var(--status-waiting);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  max-width: 300px;
+  z-index: 1001;
+}
+
+.notification.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 768px) {
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .control-group {
+    justify-content: space-between;
+  }
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-color);
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  box-shadow: var(--shadow);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+footer a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
