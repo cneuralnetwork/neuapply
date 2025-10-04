@@ -13,11 +13,15 @@ const app = express();
 app.use(cors({      // Enabling CORS for all origins or a specific one
     // This allows the server to accept requests from different origins
     origin: process.env.CLIENT_URL,
-    methods: ["GET", "POST", "PUT", "DELETE"],
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+
 
     allowedHeaders: ["Content-Type", "Authorization"],  // Specifying allowed headers for requests
     credentials: true,  // Allowing credentials to be included in requests
 }));
+
+// ✅ Allow preflight requests
+app.options("*", cors());
 
 app.use(express.json());    // Middleware to parse JSON request bodies
 
