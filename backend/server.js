@@ -1,42 +1,31 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const path = require("path");
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
 const applicationsRoutes = require("./routes/application");
 
-// Importing the necessary modules and configurations
-
 const app = express();
 
-app.use(cors({      // Enabling CORS for all origins or a specific one
-    // This allows the server to accept requests from different origins
+app.use(
+  cors({
     origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
 
-
-    allowedHeaders: ["Content-Type", "Authorization"],  // Specifying allowed headers for requests
-    credentials: true,  // Allowing credentials to be included in requests
-}));
-
-// ✅ Allow preflight requests
-app.options("*", cors());
-
-app.use(express.json());    // Middleware to parse JSON request bodies
-
+app.use(express.json());
 connectDB();
 
-app.use("/api/v1/auth", authRoutes);    // Importing and using authentication routes
-app.use("/api/v1/applications", applicationsRoutes);  // Importing and using application routes
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/applications", applicationsRoutes);
 
-
-// ✅ Add this health check route
+// ✅ Health check
 app.get("/", (req, res) => {
   res.status(200).send("Backend is live ✅");
 });
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-});
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
