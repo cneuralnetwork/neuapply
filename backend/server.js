@@ -12,7 +12,7 @@ const app = express();
 
 app.use(cors({      // Enabling CORS for all origins or a specific one
     // This allows the server to accept requests from different origins
-    origin: "http://localhost:5173",
+    origin: process.env.CLIENT_URL,
     methods: ["GET", "POST", "PUT", "DELETE"],
 
     allowedHeaders: ["Content-Type", "Authorization"],  // Specifying allowed headers for requests
