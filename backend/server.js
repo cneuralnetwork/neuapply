@@ -1,23 +1,31 @@
-require('dotenv').config();
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const connectDB = require("./config/db");
+const authRoutes = require("./routes/authRoutes");
+const applicationsRoutes = require("./routes/application");
 
 const app = express();
-app.use(cors()); // in prod: configure allowed origin(s)
+
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+  })
+);
+
 app.use(express.json());
+connectDB();
 
-const uri = process.env.MONGO_URI;
-mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('MongoDB connected'))
-  .catch(err => console.error('MongoDB connection error:', err));
+app.use("/api/v1/auth", authRoutes);
+app.use("/api/v1/applications", applicationsRoutes);
 
-app.use('/api/application', require('./routes/application'));
-app.use('/api/auth', require('./routes/authRoutes'));
-
-// Optionally serve frontend (after build) from backend:
-// app.use(express.static('../frontend'));
-// app.get('*', (req,res) => res.sendFile(path.resolve(__dirname,'../frontend','index.html')));
+// ✅ Health check
+app.get("/", (req, res) => {
+  res.status(200).send("Backend is live ✅");
+});
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

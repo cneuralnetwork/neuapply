@@ -1,100 +1,13 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NeuApply</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>NeuApply</h1>
-    <p>track your internships and applications all at one place!</p>
-  </header>
-
-  <section class="controls">
-    <div class="control-group">
-      <button id="add-application" class="add-btn">+ New Application</button>
-      <button id="toggle-view">Toggle View</button>
-    </div>
-    <div class="control-group">
-      <select id="filter-status">
-        <option value="all">All Statuses</option>
-        <option value="applied">Applied</option>
-        <option value="waiting">Waiting</option>
-        <option value="interview">Interview</option>
-        <option value="accepted">Accepted</option>
-        <option value="rejected">Rejected</option>
-      </select>
-      <select id="sort-by">
-        <option value="date-desc">Date (Newest)</option>
-        <option value="date-asc">Date (Oldest)</option>
-        <option value="company">Company (A-Z)</option>
-        <option value="status">Status</option>
-      </select>
-      <div class="theme-toggle">
-        <span>☀️</span>
-        <label class="toggle-switch">
-          <input type="checkbox" id="theme-toggle">
-          <span class="toggle-slider"></span>
-        </label>
-        <span>🌙</span>
-      </div>
-    </div>
-  </section>
-
-  <section id="applications" class="applications">
-    <div class="empty-state">
-      <p>No applications yet. Click "New Application" to get started!</p>
-    </div>
-  </section>
-  <div id="application-modal" class="modal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 id="modal-title">Add Application</h2>
-        <button class="modal-close">&times;</button>
-      </div>
-      <form id="application-form">
-        <input type="hidden" id="form-id">
-        <div class="form-group">
-          <label for="position">Position Title*</label>
-          <input type="text" id="position" required>
-        </div>
-        <div class="form-group">
-          <label for="company">Company Name*</label>
-          <input type="text" id="company" required>
-        </div>
-        <div class="form-group">
-          <label for="date">Application Date*</label>
-          <input type="date" id="date" required>
-        </div>
-        <div class="form-group">
-          <label for="status">Status*</label>
-          <select id="status" required>
-            <option value="applied">Applied</option>
-            <option value="waiting">Waiting</option>
-            <option value="interview">Interview Scheduled</option>
-            <option value="accepted">Accepted</option>
-            <option value="rejected">Rejected</option>
-          </select>
-        </div>
-        <div class="form-group">
-          <label for="followup">Follow-up Date</label>
-          <input type="date" id="followup">
-        </div>
-        <div class="form-group">
-          <label for="notes">Notes</label>
-          <textarea id="notes"></textarea>
-        </div>
-        <button type="submit" class="submit-btn">Save Application</button>
-      </form>
-    </div>
-  </div>
-
-  <div id="notification" class="notification">
-  </div>
-
-
-  <script src="script.js"></script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>frontend</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
 </html>
